@@ -1,0 +1,26 @@
+vi:
+  activerecord:
+    models:
+      user: "Người dùng"
+    attributes:
+      user: # Or whatever your resource_name is (e.g., admin)
+        username: "Tên đăng nhập"
+        email: "Email"
+        password: "Mật khẩu"
+        password_confirmation: "Xác nhận mật khẩu"
+        current_password: "Mật khẩu hiện tại"
+        remember_me: "Ghi nhớ"
+        address: "Địa chỉ"
+        phone_number: "Số điện thoại"
+        date_of_birth: "Ngày sinh"
+        bio: "Mô tả"
+  header:
+    home: "Trang chủ"
+    edit_profile: "Chỉnh sửa hồ sơ"
+    login: "Đăng nhập"
+    logout: "Đăng xuất"
+    sign_up: "Đăng ký"
+    english: "Tiếng Anh"
+    vietnamese: "Tiếng Việt"
+  msg:
+    you_sure: "Bạn có chắc không?"
