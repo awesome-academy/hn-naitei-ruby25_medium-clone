@@ -12,7 +12,7 @@ gem "devise", "~> 4.1"
 gem "dartsass-rails"
 gem "faker"
 gem "figaro"
-gem "image_processing", "1.12.2"
+gem "image_processing", "1.14.0"
 gem "mysql2"
 gem "rails-i18n"
 
