@@ -3,7 +3,7 @@ source "https://rubygems.org"
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 8.0.2"
 
-gem "active_storage_validations", "0.9.8"
+gem "active_storage_validations", "3.0.1"
 gem "bootstrap", "~> 5.3.3"
 gem "bootstrap-icons-helper"
 gem "cancancan"
