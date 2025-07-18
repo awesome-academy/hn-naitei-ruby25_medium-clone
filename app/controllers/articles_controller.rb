@@ -4,6 +4,7 @@ class ArticlesController < ApplicationController
 
   def show
     @comment = Comment.new
+    @comments = @article.comments.includes(user: { avatar_attachment: :blob })
   end
 
   def edit

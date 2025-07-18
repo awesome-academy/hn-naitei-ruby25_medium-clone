@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     }
     get "profile/:id", to: "profile#show", as: "profile"
     resources :articles do
-      resources :comments, only: [ :create, :destroy ]
+      resources :comments, only: [ :create, :edit, :update, :destroy ]
     end
     root "static_page#home"
   end

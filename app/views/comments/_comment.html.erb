@@ -1,16 +1,34 @@
-<div class="comment-item">
-  <% if comment.user.present? %>
-    <div class="comment-header">
-      <% if comment.user.avatar.attached? %>
-        <%= image_tag comment.user.avatar, class: "comment-avatar", alt: "#{comment.user.username}'s avatar" %>
-      <% else %>
-        <%= image_tag Settings.default_avatar, class: "comment-avatar", alt: "Default avatar" %>
-      <% end %>
-      <div class="comment-infor">
-        <%= link_to comment.user.username, profile_path(comment.user), class: "comment-author" %>
-        <small class="comment-time"><%= time_ago_in_words(comment.created_at) %> <%= t "common.ago" %> </small>
+<%= turbo_frame_tag "comment_form_#{comment.id}" do %>
+  <div class="comment-item">
+    <% if comment.user.present? %>
+      <div class="comment-header">
+        <% if comment.user.avatar.attached? %>
+          <%= image_tag comment.user.avatar, class: "comment-avatar", alt: "#{comment.user.username}'s avatar" %>
+        <% else %>
+          <%= image_tag Settings.default_avatar, class: "comment-avatar", alt: "Default avatar" %>
+        <% end %>
+        <div class="comment-infor">
+          <%= link_to comment.user.username, profile_path(comment.user), class: "comment-author" %>
+          <small class="comment-time"><%= time_ago_in_words(comment.created_at) %> <%= t "common.ago" %> </small>
+        </div>
+        <% if comment.user == current_user %>
+          <div class="comment-actions">
+            <%= link_to edit_article_comment_path(comment.article,comment), 
+              data: { turbo_frame: "comment_form_#{comment.id}" }, class: "text-primary" do %>
+              <%= bootstrap_icon "pencil" %>
+              <%= t "common.edit" %>
+            <% end %>
+
+            <%= link_to article_comment_path(comment.article, comment),
+              data: { turbo_method: :delete, turbo_confirm: t("msg.you_sure") },
+              class: "text-danger" do %>
+              <%= bootstrap_icon "trash3" %>
+              <%= t "common.delete" %>
+            <% end %>
+          </div>
+        <% end %>
       </div>
-    </div>
-  <% end %>
-  <p><%= comment.content %></p>
-</div>
+    <% end %>
+    <p><%= comment.content %></p>
+  </div>
+<% end %>

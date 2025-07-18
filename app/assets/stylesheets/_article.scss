@@ -385,7 +385,7 @@
 
 .comment-header {
   display: flex;
-  align-items: center;
+  align-items: start;
   gap: 10px;
   margin-bottom: 8px;
 }
@@ -441,14 +441,12 @@
 
 .comment-form {
   margin-top: 30px;
-  padding-top: 25px;
+  padding: 25px 0;
   border-top: 2px solid rgba(102, 126, 234, 0.1);
-}
-
-.comment-form h4 {
-  margin-bottom: 20px;
-  color: #1f2937;
-  font-weight: 600;
+  border-bottom: 2px solid rgba(102, 126, 234, 0.1);
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }
 
 .return-btn {
@@ -467,4 +465,18 @@
 .return-btn:hover {
   background: linear-gradient(135deg, darken($primary-color, 10%), darken($secondary-color, 10%));
   transform: translateY(-1px);
+}
+
+.comment-actions {
+  margin-top: 5px;
+  display: flex;
+  gap: 10px;
+}
+
+.comment-actions a {
+  font-size: 0.7rem;
+}
+
+.comment-actions a:hover {
+  text-decoration: underline;
 }

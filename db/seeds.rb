@@ -20,3 +20,17 @@
                password_confirmation: password, address: address, date_of_birth: date_of_birth,
                phone_number: phone, bio: bio)
 end
+
+
+5.times do |n|
+  title = Faker::Book.title
+  content = Faker::Lorem.paragraphs(number: 5).join("\n\n")
+  user = User.find(rand(1..10))
+  article = Article.create!(title: title, content: content, user: user)
+
+  rand(1..5).times do
+    comment_content = Faker::Lorem.sentence(word_count: rand(5..15))
+    comment_user = User.find(rand(1..10))
+    article.comments.create!(content: comment_content, user: comment_user)
+  end
+end
