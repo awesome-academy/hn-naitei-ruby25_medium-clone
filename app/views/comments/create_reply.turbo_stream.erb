@@ -1,0 +1,5 @@
+<%= turbo_stream.remove "reply_form_#{@comment.id}" %>
+
+<%= turbo_stream.append "replies_#{@comment.id}" do %>
+  <%= render partial: "comments/reply", locals: { comment: @new_comment } %>
+<% end %>

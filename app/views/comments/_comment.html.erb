@@ -11,19 +11,22 @@
           <%= link_to comment.user.username, profile_path(comment.user), class: "comment-author" %>
           <small class="comment-time"><%= time_ago_in_words(comment.created_at) %> <%= t "common.ago" %> </small>
         </div>
-        <% if comment.user == current_user %>
-          <div class="comment-actions">
-            <%= link_to edit_article_comment_path(comment.article,comment), 
-              data: { turbo_frame: "comment_form_#{comment.id}" }, class: "text-primary" do %>
-              <%= bootstrap_icon "pencil" %>
-              <%= t "common.edit" %>
+        <% if user_signed_in? %>
+          <div class="reply-actions">
+            <%= link_to new_reply_article_comment_path(comment.article, comment), data: { turbo_stream: true, turbo_frame: "_self" }, class: "text-secondary" do %>
+              <%= bootstrap_icon "reply" %>
             <% end %>
+            <% if comment.user == current_user %>
+              <%= link_to edit_article_comment_path(comment.article,comment), 
+                data: { turbo_frame: "comment_form_#{comment.id}" }, class: "text-primary" do %>
+                <%= bootstrap_icon "pencil" %>
+              <% end %>
 
-            <%= link_to article_comment_path(comment.article, comment),
-              data: { turbo_method: :delete, turbo_confirm: t("msg.you_sure") },
-              class: "text-danger" do %>
-              <%= bootstrap_icon "trash3" %>
-              <%= t "common.delete" %>
+              <%= link_to article_comment_path(comment.article, comment),
+                data: { turbo_method: :delete, turbo_confirm: t("msg.you_sure") },
+                class: "text-danger" do %>
+                <%= bootstrap_icon "trash3" %>
+              <% end %>
             <% end %>
           </div>
         <% end %>
@@ -32,3 +35,6 @@
     <p><%= comment.content %></p>
   </div>
 <% end %>
+<div id="replies_<%= comment.id %>" class="ms-5">
+    <%= render partial: "comments/reply", collection: comment.replies, as: :comment %>
+</div>

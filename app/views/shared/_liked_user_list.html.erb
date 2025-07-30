@@ -12,7 +12,7 @@
         <%= render partial: "shared/user_item", collection: article.liked_users, as: :user %>
 
         <% if article.liked_users.empty? %>
-          <p class="text-muted"><%= t("common.no_likes_yet") %></p>
+          <p class="text-muted"><%= t("articles.no_likes_yet") %></p>
         <% end %>
       </div>
     </div>

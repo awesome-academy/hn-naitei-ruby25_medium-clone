@@ -31,6 +31,7 @@ vi:
     logout: "Đăng xuất"
     sign_up: "Đăng ký"
     profiles: "Danh sách người dùng"
+    my_profile: "Hồ sơ của tôi"
     english: "Tiếng Anh"
     vietnamese: "Tiếng Việt"
     search_placehoder: "Tìm kiếm bài viết..."
@@ -75,9 +76,11 @@ vi:
       address: "Địa chỉ"
       birthday: "Ngày sinh"
       about_me: "Về tôi"
+      no_articles: "Hồ sơ này chưa có bài viết nào."
   articles:
     recently_updated: "Bài viết mới"
     liked_user: "Người thích bài viết"
+    no_likes_yet: "Chưa có ai thích bài viết này."
     errors:
       one: "1 lỗi đã ngăn không cho bài viết này được lưu:"
       other: "%{count} lỗi đã ngăn không cho bài viết này được lưu:"
@@ -89,6 +92,9 @@ vi:
       no_comments: "Chưa có bình luận nào. Hãy là người đầu tiên bình luận!"
       login_to_comment: "Vui lòng đăng nhập để để lại bình luận."
       no_article: "Hồ sơ này chưa có bài viết nào."
+  comment:
+    reply_placeholder: "Trả lời bình luận..."
+    reply_btn: "Trả lời"
   notification:
     no_notifications: "Không có thông báo"
     article_favorited: "Bài viết '%{article}' của bạn đã được yêu thích."

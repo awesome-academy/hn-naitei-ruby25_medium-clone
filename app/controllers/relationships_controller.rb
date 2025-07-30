@@ -24,7 +24,6 @@ class RelationshipsController < ApplicationController
       flash[:alert] = t("msg.permission_denied")
       return redirect_to root_path
     end
-
     @user = @relationship.followed
     current_user.unfollow(@user)
     respond_to do |format|

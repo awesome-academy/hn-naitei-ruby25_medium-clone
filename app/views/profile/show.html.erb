@@ -1,3 +1,4 @@
+<% content_for :title, @user.username %>
 <%= render "profile_header" %>
 
 <div class="main-content">
@@ -25,7 +26,7 @@
             <div class="info-item">
                 <%= bootstrap_icon "cake", height: Settings.default.view.edit_profile.icon_size %>
                 <span class="info-label"><%= t ".birthday" %>:</span>
-                <span class="info-value"><%= @user.date_of_birth.strftime("%B %d, %Y") %></span>
+                <span class="info-value"><%= l @user.date_of_birth, format: "%B %d, %Y" %></span>
             </div>
         <% end %>
     </div>
@@ -42,7 +43,12 @@
         </div>
     <% end %>
     <% if @user == current_user %>
-        <%= link_to t("common.edit"), edit_user_registration_path, class: "btn btn-primary" %>
+      <div class="d-flex justify-content-center">
+        <%= link_to edit_user_registration_path, class: "btn btn-primary" do %>
+          <%= bootstrap_icon "pencil-square", height: Settings.default.view.edit_profile.icon_size %>
+          <span><%= t "common.edit" %></span>
+        <% end %>
+      </div>
     <% end %>
   </div>
   <div>
@@ -53,7 +59,7 @@
       <% if @user.articles.any? %>
         <%= render partial:"shared/article_card", collection: @user.articles, as: :article %>
       <% else %>
-        <p><%= t ".no_articles" %></p>
+        <p class="text-center"><%= t ".no_articles" %></p>
       <% end %>
   </div>
 </div>

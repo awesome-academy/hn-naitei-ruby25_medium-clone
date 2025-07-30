@@ -11,6 +11,8 @@ class Ability
     can :create, Article
     can :modify, Article, user_id: user.id
     can :create, Comment
+    can :new_reply, Comment
+    can :create_reply, Comment
     can :modify, Comment, user_id: user.id
     can :create, Relationship, follower_id: user.id
     can :destroy, Relationship, follower_id: user.id

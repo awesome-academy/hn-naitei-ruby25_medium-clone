@@ -25,12 +25,19 @@
   <body>
     
     <%= render "shared/header" %>
-    <div class="container-fluid mt-5">
-      <p class="alert notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
-    </div>
-    <div class="container">
-      <%= yield %>
+    <div class="mt-5 pt-5">
+      <div class="container-fluid">
+        <% if notice.present? %>
+          <p class="alert alert-info"><%= notice %></p>
+        <% end %>
+
+        <% if alert.present? %>
+          <p class="alert alert-danger"><%= alert %></p>
+        <% end %>
+      </div>
+      <div class="container">
+        <%= yield %>
+      </div>
     </div>
   </body>
 </html>

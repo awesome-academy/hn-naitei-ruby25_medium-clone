@@ -1,0 +1,18 @@
+<div id="reply_form_<%= @comment.id %>">
+  <div class="d-flex align-items-center gap-2 mt-3 reply-comment">
+    <% if @article.user.avatar.attached? %>
+      <%= image_tag @article.user.avatar, class: "author-avatar", alt: "#{@article.user.username}'s avatar" %>
+    <% else %>
+      <%= image_tag Settings.default_avatar, class: "author-avatar", alt: "Default avatar" %>
+    <% end %>
+
+    <%= form_with(model: [@article, @new_comment], url: create_reply_article_comment_path(@article, @comment), class: "reply-form") do |form| %>
+      <%= form.hidden_field :parent_id, value: @comment.id %>
+      <%= form.text_field :content, placeholder: t("comment.reply_placeholder"), rows: 3, class: "form-control flex-grow-1" %>
+
+      <div>
+        <%= form.submit t("comment.reply_btn"), class: "btn btn-sm btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</div>

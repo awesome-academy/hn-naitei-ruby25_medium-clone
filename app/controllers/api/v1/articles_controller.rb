@@ -47,6 +47,7 @@ module Api::V1
     end
 
     def update
+      authorize! :modify, @article
       if @article.update(article_params)
         render json: {data: @article, status: :success}, status: :ok
       else
@@ -56,6 +57,7 @@ module Api::V1
     end
 
     def destroy
+      authorize! :modify, @article
       @article.destroy
       render json: {message: Settings.msg.article_deleted}, status: :ok
     end

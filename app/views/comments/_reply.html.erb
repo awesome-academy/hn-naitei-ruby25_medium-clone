@@ -1,0 +1,30 @@
+<%= turbo_frame_tag "comment_form_#{comment.id}" do %>
+  <div class="reply-item reply-comment">
+    <% if comment.user.present? %>
+      <div class="reply-header">
+        <% if comment.user.avatar.attached? %>
+          <%= image_tag comment.user.avatar, class: "reply-avatar", alt: "#{comment.user.username}'s avatar" %>
+        <% else %>
+          <%= image_tag Settings.default_avatar, class: "reply-avatar", alt: "Default avatar" %>
+        <% end %>
+        <%= link_to comment.user.username, profile_path(comment.user), class: "comment-author" %>
+        <small class="comment-time"><%= time_ago_in_words(comment.created_at) %> <%= t "common.ago" %></small>
+        <% if comment.user == current_user %>
+          <div class="reply-actions">
+            <%= link_to edit_article_comment_path(comment.article,comment), 
+              data: { turbo_frame: "comment_form_#{comment.id}" }, class: "text-primary" do %>
+              <%= bootstrap_icon "pencil" %>
+            <% end %>
+
+            <%= link_to article_comment_path(comment.article, comment),
+              data: { turbo_method: :delete, turbo_confirm: t("msg.you_sure") },
+              class: "text-danger" do %>
+              <%= bootstrap_icon "trash3" %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+    <p class="ms-5"><%= comment.content %></p>
+<% end %>

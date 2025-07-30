@@ -1,9 +1,18 @@
 module Api::V1
   class ApiController < ApplicationController
+    include CanCan::ControllerAdditions
+
     skip_before_action :verify_authenticity_token
     skip_before_action :set_ransack_query
     before_action :authenticate
     before_action :initialize_api_ransack_query
+
+    attr_reader :current_user
+
+    rescue_from CanCan::AccessDenied do
+      render json: {status: :error, message: Settings.msg.action_not_allowed},
+             status: :forbidden
+    end
 
     private
     def authenticate

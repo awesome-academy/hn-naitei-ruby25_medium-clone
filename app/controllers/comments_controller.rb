@@ -54,6 +54,30 @@ class CommentsController < ApplicationController
     end
   end
 
+  def new_reply
+    @new_comment = @article.comments.build(parent_id: @comment.id)
+
+    respond_to do |format|
+      format.turbo_stream
+    end
+  end
+
+  def create_reply
+    @new_comment = @article.comments.build(comment_params)
+    @new_comment.user = current_user
+    @new_comment.parent_id = @comment.id
+
+    if @new_comment.save
+      respond_to do |format|
+        format.turbo_stream
+        format.html{redirect_to article_path(@article)}
+      end
+    else
+      flash[:alert] = t "msg.reply_failed"
+      redirect_to article_path(@article)
+    end
+  end
+
   private
   def comment_params
     params.require(:comment).permit(Comment::PERMIT_PARAMS)

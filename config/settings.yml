@@ -22,3 +22,4 @@ msg:
   comment_deleted: "Comment deleted successfully"
   follow_success: "Followed successfully"
   unfollow_success: "Unfollowed successfully"
+  action_not_allowed: "You are not allowed to perform this action"

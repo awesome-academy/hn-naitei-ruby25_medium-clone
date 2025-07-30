@@ -49,9 +49,11 @@ en:
       address: "Address"
       birthday: "Birthday"
       about_me: "About Me"
+      no_articles: "This profile has no articles yet."
   articles:
     recently_updated: "Recently Updated"
     liked_user: "Liked Users"
+    no_likes_yet: "No likes yet."
     errors:
       one: "1 error prohibited this article from being saved:"
       other: "%{count} errors prohibited this article from being saved:"

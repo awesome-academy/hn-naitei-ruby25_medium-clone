@@ -13,7 +13,12 @@ Rails.application.routes.draw do
       get "/following", to: "profile#following", as: "following"
     end
     resources :articles do
-      resources :comments, only: [ :create, :edit, :update, :destroy ]
+      resources :comments, only: [ :create, :edit, :update, :destroy ] do
+        member do
+          get :new_reply, to: "comments#new_reply"
+          post :create_reply, to: "comments#create_reply"
+        end
+      end
       resources :favorites, only: %i[create destroy]
     end
     scope "notifications" do

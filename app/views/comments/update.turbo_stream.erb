@@ -1,3 +1,7 @@
 <%= turbo_stream.replace "comment_form_#{@comment.id}" do %>
-  <%= render @comment %>
+  <% if @comment.parent.present? %>
+    <%= render partial: "comments/reply", locals: { comment: @comment } %>
+  <% else %>
+    <%= render @comment %>
+  <% end %>
 <% end %>

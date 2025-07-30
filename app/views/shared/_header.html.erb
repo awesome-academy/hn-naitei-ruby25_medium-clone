@@ -16,41 +16,16 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <%= link_to t("header.home"), root_path, class: "nav-link" %>
+            <%= link_to profiles_path, class: "nav-link" do %>
+              <%= bootstrap_icon "people-fill", height: Settings.default.view.edit_profile.icon_size %>
+              <span><%= t "header.profiles" %></span>
+            <% end %>
           </li>
-          <li class="nav-item">
-            <%= link_to t("header.profiles"), profiles_path, class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to t('header.profiles'), profiles_path, class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to t('header.profiles'), profiles_path, class: "nav-link" %>
-          </li>
-          <% if user_signed_in? %>
-            <li class="nav-item">
-              <%= link_to t("header.profile"), profile_path(current_user), class: "nav-link" %>
-            </li>
-            <li class="nav-item">
-              <%= link_to t("header.logout"), destroy_user_session_path, 
-                data: { turbo_method: :delete, turbo_confirm: t("msg.you_sure") }, class: "nav-link" %>
-            </li>
-          <% else %>
-            <li class="nav-item">
-              <%= link_to t("header.login"), new_user_session_path, class: "nav-link" %>
-            </li>
-            <li class="nav-item">
-               <%= link_to t("header.sign_up"), new_user_registration_path, class: "nav-link" %>
-            </li>
-          <% end %>
         </ul>
         <%= render "shared/search_form" %>
 
-        <% if user_signed_in? %>
-          <%= render "shared/notification_list" %>
-        <% end %>
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item dropdown">
+        <ul class="navbar-nav ms-auto d-flex align-items-center gap-3">
+          <li class="nav-item dropdown me-5">
             <a 
               class="nav-link dropdown-toggle" 
               href="#" id="navbarDropdown" 
@@ -58,9 +33,10 @@
               data-bs-toggle="dropdown" 
               aria-expanded="false"
             >
+              <%= bootstrap_icon "globe", height: Settings.default.view.edit_profile.icon_size %>
               <%= I18n.locale == :en ? t("header.english") : t("header.vietnamese") %>
             </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <ul class="dropdown-menu shadow" aria-labelledby="navbarDropdown">
               <li>
                 <%= link_to t("header.english"), url_for(locale: :en), class: "dropdown-item" %>
               </li>
@@ -69,6 +45,49 @@
               </li>
             </ul>
           </li>
+          <% if user_signed_in? %>
+            <%= render "shared/notification_list" %>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle d-flex align-items-center gap-2 " href="#" id="navbarUserDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <% if current_user.avatar.attached? && current_user.avatar.blob.persisted? %>
+                  <%= image_tag current_user.avatar, class: "author-avatar", alt: "#{current_user.username}'s avatar" %>
+                <% else %>
+                  <%= image_tag Settings.default_avatar, class: "author-avatar", alt: "Default avatar" %>
+                <% end %>
+                <%= current_user.username %>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="navbarUserDropdown">
+                <li>
+                  <%= link_to profile_path(current_user), class: "dropdown-item d-flex gap-2" do %>
+                    <%= bootstrap_icon "person-fill", height: Settings.default.view.edit_profile.icon_size %>
+                    <%= t("header.my_profile") %>
+                  <% end %>
+                </li>
+                <li><hr class="dropdown-divider"></li>
+                <li>
+                  <%= link_to destroy_user_session_path, 
+                    class: "dropdown-item text-danger d-flex gap-2", data: { turbo_method: :delete, turbo_confirm: t("msg.you_sure") } do %>
+                    <%= bootstrap_icon "box-arrow-right", height: Settings.default.view.edit_profile.icon_size %>
+                    <%= t("header.logout") %>
+                  <% end %>
+                </li>
+              </ul>
+            </li>
+          <% else %>
+            <li class="nav-item">
+              <%= link_to new_user_session_path, class: "nav-link d-flex align-items-center gap-2" do %>
+                <%= bootstrap_icon "box-arrow-in-right", height: Settings.default.view.edit_profile.icon_size %>
+                <span><%= t "header.login" %></span>
+              <% end %>
+            </li>
+            |
+            <li class="nav-item">
+               <%= link_to new_user_registration_path, class: "nav-link d-flex align-items-center gap-2" do %>
+                <%= bootstrap_icon "person-add", height: Settings.default.view.edit_profile.icon_size %>
+                <span><%= t "header.sign_up" %></span>
+              <% end %>
+            </li>
+          <% end %>
         </ul>
       </div>
     </div>

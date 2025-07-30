@@ -1,0 +1,3 @@
+<%= turbo_stream.append "replies_#{@comment.id}" do %>
+  <%= render partial: "comments/reply_form" %>
+<% end %>
